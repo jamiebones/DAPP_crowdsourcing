@@ -4,9 +4,8 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-//import "@openzeppelin/upgrades/contracts/ownership/Ownable.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
-//import "@openzeppelin/upgrades/contracts/Initializable.sol";
+
 
 contract CrowdSourcing is Ownable, Initializable {
     

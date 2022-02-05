@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "hardhat": "hardhat node",
     "testLocal": "hardhat test test/index.ts --network localhost",
     "fork": "hardhat node --fork https://mainnet.infura.io/v3/c946d344b8664843b919e16db8aa9baa"
   },

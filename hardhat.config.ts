@@ -1,11 +1,13 @@
 import * as dotenv from "dotenv";
 
-import { HardhatUserConfig, task } from "hardhat/config";
+import { HardhatUserConfig } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
+
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "hardhat-contract-sizer";
 import fs from "fs";
 dotenv.config();
 
@@ -30,15 +32,9 @@ const config: HardhatUserConfig = {
       {
         version: "0.7.0",
       },
-      {
-        version: "^0.5.0",
-      },
+    
       {
         version: "0.8.4",
-      },
-      {
-        version: "^0.6.6",
-       // settings: {},
       },
     ],
   },
@@ -47,9 +43,6 @@ const config: HardhatUserConfig = {
       forking: {
         enabled: process.env.FORK === 'true',
           url: `https://mainnet.infura.io/v3/c946d344b8664843b919e16db8aa9baa`,
-        //url: `https://eth-mainnet.alchemyapi.io/v2/SR-wBhpxMirgFtp4OGeJoWKO1ObmVeFg`,
-         //url: "https://eth-mainnet.alchemyapi.io/v2/aZE8GWssF3gJnNBD7-8I33RKlru_Zx0L",
-        //url: 'https://mainnet.infura.io/v3/9a1eacc6b18f436dab839c1713616fd1'
         //blockNumber: 11380080, 
       },
       initialBaseFeePerGas: 0, // workaround for eip-1559 (solidity-coverage)
@@ -59,7 +52,7 @@ const config: HardhatUserConfig = {
      localhost: {
       url: `http://127.0.0.1:8545`,
       accounts: {
-       mnemonic
+        mnemonic
      }
    },
     rinkeby: {
@@ -81,9 +74,15 @@ const config: HardhatUserConfig = {
       }
     }
   },
+  contractSizer: {
+    alphaSort: true,
+    runOnCompile: process.env.COVERAGE ? false: true,
+    disambiguatePaths: false,
+  },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
+    currency: 'USD',
+    gasPrice: 43,
+    enabled: true,
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
